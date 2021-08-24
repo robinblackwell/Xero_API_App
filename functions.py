@@ -46,7 +46,7 @@ def XeroTenants(access_token):
         json_dict = tenants
     return json_dict['tenantId']
 
-# 6.1 Refreshing access tokens
+# 5. Refreshing access tokens
 def XeroRefreshToken(refresh_token, b64_id_secret):
     token_refresh_url = 'https://identity.xero.com/connect/token'
     response = requests.post(token_refresh_url,
@@ -67,7 +67,7 @@ def XeroRefreshToken(refresh_token, b64_id_secret):
     
     return [json_response['access_token'], json_response['refresh_token']]
 
-# 6.2 Call the API
+# 6. Call the API
 def GetXeroData(category, b64_id_secret):
     old_refresh_token = open('refresh_token.txt', 'r').read()
     new_tokens = XeroRefreshToken(old_refresh_token, b64_id_secret)
@@ -82,7 +82,7 @@ def GetXeroData(category, b64_id_secret):
                            })
     return response.json()
 
-# 7 Create a new transaction
+# 7. Create a new transaction
 def XeroNewTransaction(new_data, b64_id_secret):
     old_refresh_token = open('refresh_token.txt', 'r').read()
     new_tokens = XeroRefreshToken(old_refresh_token, b64_id_secret)
